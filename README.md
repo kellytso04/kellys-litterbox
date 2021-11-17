@@ -3,4 +3,4 @@
 
 # Getting set up
 This codebase requires a **GitHub API token**.
-Within the codebase, locate the file `config.example.js`, make a copy of it, and replace the placeholder text with your personal access token. That's it!
+Within the codebase, locate the file `config.example.js`, make a copy of it titled `config.js`, and replace the placeholder text with your personal access token. That's it!
