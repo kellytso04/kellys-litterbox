@@ -2,6 +2,7 @@ node_modules
 client/dist/bundle.js
 config.js
 db/config.js
+data
 coverage
 data.json
 .env
