@@ -1,19 +1,18 @@
 const fs = require('fs');
 const fastcsv = require('fast-csv');
 const { Pool } = require('pg');
-const path = require('path');
-// const poo = require('../data/products.csv');
 
-let stream = fs.createReadStream('/Users/kellytso/Documents/GitHub/litterbox/data/products.csv');
+let stream = fs.createReadStream('/Users/kellytso/Documents/GitHub/litterbox/data/photos.csv');
   stream.on('error', (err) => {
     console.error(err);
   });
 let csvData = [];
-// is it wise to store the data from the csv? it's a lot of space
 let csvStream = fastcsv
   .parse()
-  .on('data', (data) => {
-    csvData.push(data);
+  .on('data', (err, data) => {
+    if (!err) {
+      csvData.push(data);
+    }
   })
   .on('end', (data) => {
     // Removes header from the array
@@ -26,15 +25,17 @@ let csvStream = fastcsv
       port: 5432
     });
 
-    const query = 'INSERT INTO products (id, name, slogan, description, category, default_price) VALUES ($1, $2, $3, $4, $5, $6)';
+    const query = 'INSERT INTO photos (id, style_id, url, thumbnail_url) VALUES ($1, $2, $3, $4)';
 
     pool.connect( (err, client, done) => {
       if (err) {
+        console.error('error connecting');
         throw new Error(err);
       } else {
         csvData.forEach( (row) => {
           client.query(query, row, (err, res) => {
             if (err) {
+              console.error('err in a query');
               throw new Error(err);
             }
           })
@@ -46,7 +47,8 @@ let csvStream = fastcsv
 
   })
   .on('error', (err) => {
+    console.error('err calling fastcsv');
     console.error(err);
-  })
+  });
 
 stream.pipe(csvStream);
