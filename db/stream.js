@@ -2,6 +2,12 @@ const fs = require('fs');
 const fastcsv = require('fast-csv');
 const { Pool } = require('pg');
 
+const pool = new Pool({
+  user: 'kellytso',
+  database: 'sdc',
+  port: 5432
+});
+
 let stream = fs.createReadStream('/Users/kellytso/Documents/GitHub/litterbox/data/photos.csv');
   stream.on('error', (err) => {
     console.error(err);
@@ -17,14 +23,6 @@ let csvStream = fastcsv
   .on('end', (data) => {
     // Removes header from the array
     csvData.shift();
-
-    // TODO: Refactor so that you don't pool every time
-    // Connect to the database and save data
-    const pool = new Pool({
-      user: 'kellytso',
-      database: 'sdc',
-      port: 5432
-    });
 
     const query = 'INSERT INTO photos (id, style_id, url, thumbnail_url) VALUES ($1, $2, $3, $4)';
 
@@ -50,3 +48,7 @@ let csvStream = fastcsv
   });
 
 stream.pipe(csvStream);
+
+module.exports = {
+  db: pool
+}
