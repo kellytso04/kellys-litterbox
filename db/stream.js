@@ -18,6 +18,7 @@ let csvStream = fastcsv
     // Removes header from the array
     csvData.shift();
 
+    // TODO: Refactor so that you don't pool every time
     // Connect to the database and save data
     const pool = new Pool({
       user: 'kellytso',
@@ -29,13 +30,11 @@ let csvStream = fastcsv
 
     pool.connect( (err, client, done) => {
       if (err) {
-        console.error('error connecting');
         throw new Error(err);
       } else {
         csvData.forEach( (row) => {
           client.query(query, row, (err, res) => {
             if (err) {
-              console.error('err in a query');
               throw new Error(err);
             }
           })
@@ -47,7 +46,6 @@ let csvStream = fastcsv
 
   })
   .on('error', (err) => {
-    console.error('err calling fastcsv');
     console.error(err);
   });
 
