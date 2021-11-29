@@ -1,10 +1,10 @@
-const { db } = require('../../db/stream.js');
+const { client } = require('../../db/config.js');
 
 module.exports = {
   getAllProducts: () => {
     const queryString = 'SELECT * FROM products';
 
-    db.query(queryString)
+    client.query(queryString)
       .then( ( {data} ) => {
         console.log('products: ', data);
         return data;
@@ -18,7 +18,7 @@ module.exports = {
   getProduct: (product_id) => {
     const queryString = '';
 
-    db.query(queryString)
+    client.query(queryString)
       .then( ( {data} ) => {
         return data;
       })
