@@ -2,7 +2,7 @@ const { client } = require('../../db/config.js');
 
 module.exports = {
   getAllProducts: () => {
-    const queryString = 'SELECT * FROM products';
+    const queryString = `SELECT * FROM products`;
 
     client.query(queryString)
       .then( ( {data} ) => {
@@ -16,7 +16,7 @@ module.exports = {
   },
 
   getProduct: (product_id) => {
-    const queryString = '';
+    const queryString = `SELECT * FROM products WHERE id = ${product_id}`;
 
     client.query(queryString)
       .then( ( {data} ) => {
