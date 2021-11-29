@@ -1,8 +1,8 @@
 node_modules
 client/dist/bundle.js
+client/dist/bundle.js.LICENSE.txt
 config.js
 db/config.js
 data
 coverage
-data.json
 .env
