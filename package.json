@@ -5,6 +5,7 @@
   "main": "config.example.js",
   "scripts": {
     "start": "nodemon server/index.js",
+    "build": "webpack --watch development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +25,16 @@
     "fast-csv": "^4.3.6",
     "jest": "^27.3.1",
     "nodemon": "^2.0.15",
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
+    "babel-loader": "^8.2.3",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
   }
 }
