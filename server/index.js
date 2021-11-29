@@ -1,7 +1,12 @@
 const express = require('express');
 const axios = require('axios');
-// TODO: Import server helpers
 const { getAllProducts, getProduct } = require('./models/productModel.js');
+const { getProductFeatures } = require('./models/featureModel.js');
+const { getProductStyles } = require('./models/stylesModel.js');
+const { getSkus } = require('./models/skusModel.js');
+const { getStylePhotos } = require('./models/photosModel.js');
+const { getRelatedProducts } = require('./models/relatedModel.js');
+const { viewCart, addToCart } = require('./models/cartModel.js');
 
 const app = express();
 
@@ -11,7 +16,6 @@ app.use(express.urlencoded( {extended: true} ));
 
 
 // -- Routes -----------------------------------------------------------------------------
-// TODO: Build out all your routes!
 app.get('/products', (req, res) => {
   getAllProducts()
     .then( (products) => {
@@ -19,40 +23,96 @@ app.get('/products', (req, res) => {
     })
     .catch( (err) => {
       console.error(err);
-      console.error('Error getting products in server/index.js');
+      console.error('Error sending products in server/index.js');
     })
 });
 
 app.get('/products/:product_id', (req, res) => {
-
+  getProduct(req.body.product_id)
+    .then( (product) => {
+      res.status(200).send(product);
+    })
+    .catch( (err) => {
+      console.error(err);
+      console.error('Error sending product in server/index.js');
+    });
 });
 
 app.get('/features/:product_id', (req, res) => {
-
+  getProductFeatures(req.body.product_id)
+    .then( (features) => {
+      res.status(200).send(features);
+    })
+    .catch( (err) => {
+      console.error(err);
+      console.error('Error sending features in server/index.js');
+    });
 });
 
 app.get('/styles/:product_id', (req, res) => {
-
+  getProductStyles(req.body.product_id)
+    .then( (styles) => {
+      res.status(200).send(styles);
+    })
+    .catch( (err) => {
+      console.error(err);
+      console.error('Error sending styles in server/index.js');
+    })
 });
 
-app.get('/skus/:product_id', (req, res) => {
-
+app.get('/skus/:style_id', (req, res) => {
+  getSkus(req.body.style_id)
+    .then( (skus) => {
+      res.status(200).send(skus);
+    })
+    .catch( (err) => {
+      console.error(err);
+      console.error('Error sending skus in server/index.js');
+    })
 });
 
 app.get('/photos/:style_id', (req, res) => {
-
+  getStylePhotos(req.body.style_id)
+    .then( (photos) => {
+      res.status(200).send(photos);
+    })
+    .catch( (err) => {
+      console.error(err);
+      console.error('Error sending photos in server/index.js');
+    });
 })
 
 app.get('/related/:product_id', (req, res) => {
-
+  getRelatedProducts(req.body.product_id)
+    .then( (products) => {
+      res.status(200).send(products);
+    })
+    .catch( (err) => {
+      console.error(err);
+      console.error('Error sending related products in server/index.js');
+    });
 });
 
 app.get('/cart', (req, res) => {
-
+  viewCart()
+    .then( (cartItems) => {
+      res.status(200).send(cartItems);
+    })
+    .catch( (err) => {
+      console.error(err);
+      console.error('Error sending cart items in server/index.js');
+    });
 });
 
 app.post('/cart', (req, res) => {
-
+  addToCart(req.body.item)
+    .then( () => {
+      res.sendStatus(200);
+    })
+    .catch( (err) => {
+      console.error(err);
+      console.error('Error adding item to cart in server/index.js');
+    });
 });
 
 
