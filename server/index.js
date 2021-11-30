@@ -28,7 +28,7 @@ app.get('/products', (req, res) => {
 });
 
 app.get('/products/:product_id', (req, res) => {
-  getProduct(req.body.product_id)
+  getProduct(req.params.product_id)
     .then( (product) => {
       res.status(200).send(product);
     })
@@ -39,7 +39,7 @@ app.get('/products/:product_id', (req, res) => {
 });
 
 app.get('/features/:product_id', (req, res) => {
-  getProductFeatures(req.body.product_id)
+  getProductFeatures(req.params.product_id)
     .then( (features) => {
       res.status(200).send(features);
     })
@@ -50,7 +50,7 @@ app.get('/features/:product_id', (req, res) => {
 });
 
 app.get('/styles/:product_id', (req, res) => {
-  getProductStyles(req.body.product_id)
+  getProductStyles(req.params.product_id)
     .then( (styles) => {
       res.status(200).send(styles);
     })
@@ -83,7 +83,7 @@ app.get('/photos/:style_id', (req, res) => {
 })
 
 app.get('/related/:product_id', (req, res) => {
-  getRelatedProducts(req.body.product_id)
+  getRelatedProducts(req.params.product_id)
     .then( (products) => {
       res.status(200).send(products);
     })
