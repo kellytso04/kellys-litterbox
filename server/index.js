@@ -84,8 +84,8 @@ app.get('/photos/:style_id', (req, res) => {
 
 app.get('/related/:product_id', (req, res) => {
   getRelatedProducts(req.params.product_id)
-    .then( (products) => {
-      res.status(200).send(products);
+    .then( (relatedProducts) => {
+      res.status(200).send(relatedProducts);
     })
     .catch( (err) => {
       console.error(err);
@@ -105,8 +105,11 @@ app.get('/cart', (req, res) => {
 });
 
 app.post('/cart', (req, res) => {
+  // NOTE Item should be in the following format:
+  // {id, name, sku_id, size, price, count}
   addToCart(req.body.item)
     .then( () => {
+      console.log(`Successfully added ${item} to cart`);
       res.sendStatus(200);
     })
     .catch( (err) => {
