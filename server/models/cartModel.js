@@ -4,10 +4,9 @@ module.exports = {
   viewCart: () => {
     const queryString = 'SELECT * FROM cart';
 
-    client.query(queryString)
-      .then( ({data}) => {
-        console.log(data);
-        return data;
+    return client.query(queryString)
+      .then( ({rows}) => {
+        return rows;
       })
       .catch( (err) => {
         console.error(err);
@@ -16,7 +15,7 @@ module.exports = {
   },
 
   addToCart: (item) => {
-    const queryString = 'INSERT INTO cart(name, sku_id, size, price, count) VALUES(value1, value2, value3, value4, value5)';
+    const queryString = 'INSERT INTO cart(id, name, sku_id, size, price, count) VALUES(value1, value2, value3, value4, value5, value6)';
 
     client.query(queryString)
       .catch( (err) => {
