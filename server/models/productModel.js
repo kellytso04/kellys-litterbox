@@ -2,12 +2,11 @@ const { client } = require('../../db/config.js');
 
 module.exports = {
   getAllProducts: () => {
-    const queryString = `SELECT * FROM products`;
+    const queryString = `SELECT * FROM products LIMIT 5`;
 
-    client.query(queryString)
-      .then( ( {data} ) => {
-        console.log('products: ', data);
-        return data;
+    return client.query(queryString) // Returns an array of product objects
+      .then( ( {rows} ) => {
+        return rows;
       })
       .catch( (err) => {
         console.error(err);
@@ -16,13 +15,11 @@ module.exports = {
   },
 
   getProduct: (product_id) => {
-    console.log('productID: ', product_id);
     const queryString = `SELECT * FROM products WHERE id = ${product_id}`;
-    console.log(queryString);
-    client.query(queryString)
+
+    return client.query(queryString)
       .then( ( {rows} ) => {
-        console.log('rows: ', rows);
-        return rows;
+        return rows[0];
       })
       .catch( (err) => {
         console.error(err);
