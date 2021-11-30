@@ -16,11 +16,13 @@ module.exports = {
   },
 
   getProduct: (product_id) => {
+    console.log('productID: ', product_id);
     const queryString = `SELECT * FROM products WHERE id = ${product_id}`;
-
+    console.log(queryString);
     client.query(queryString)
-      .then( ( {data} ) => {
-        return data;
+      .then( ( {rows} ) => {
+        console.log('rows: ', rows);
+        return rows;
       })
       .catch( (err) => {
         console.error(err);
