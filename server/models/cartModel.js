@@ -15,6 +15,7 @@ module.exports = {
   },
 
   addToCart: (item) => {
+    console.log('made it to addToCart');
     const queryString = 'INSERT INTO cart(id, name, sku_id, size, price, count) VALUES(value1, value2, value3, value4, value5, value6)';
 
     client.query(queryString)

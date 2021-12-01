@@ -107,6 +107,7 @@ app.get('/cart', (req, res) => {
 app.post('/cart', (req, res) => {
   // NOTE Item should be in the following format:
   // {id, name, sku_id, size, price, count}
+  console.log('req body: ', req.body);
   addToCart(req.body.item)
     .then( () => {
       console.log(`Successfully added ${item} to cart`);
@@ -117,7 +118,6 @@ app.post('/cart', (req, res) => {
       console.error('Error adding item to cart in server/index.js');
     });
 });
-
 
 // ------------------------------------------------------------------------------------
 app.listen(3000, () => {
