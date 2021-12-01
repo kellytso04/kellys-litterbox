@@ -1,6 +1,5 @@
 node_modules
 config.js
-db/config.js
 data
 coverage
 .env
