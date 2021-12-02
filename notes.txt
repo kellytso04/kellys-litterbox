@@ -1,0 +1,33 @@
+Log into psql’s CLI using: psql -d databasename -U username
+
+MISC NOTES:
+- db and server go on separate ec2s
+- another option is skip docker, deploy, and then go back + use docker + deploy again
+
+------------------------------------------------------------------------------------
+Challenge: I'd like to add my db/config.js file to .dockerignore so that my
+personal database login information doesn't get uploaded. I'd instead replace it
+with a db/config.example.js file so that anyone who uses this repository can
+simply plug their information in and use it.
+
+Steps to solve this:
+- Go into docker container
+- Create db/config.js there
+- Manually edit it with vim
+- Upload that file to database's EC2 instance
+
+------------------------------------------------------------------------------------
+Challenge: Getting an issue because my db/config.js is using Postgres's default port
+5432. Resident recommended I look into a solution where I get the Postgres port
+forwarded to the Docker container.
+
+------------------------------------------------------------------------------------
+Challenge: Learning to create Postgres instance in Docker
+
+Steps:
+- Download postgres image
+- Run cmd `docker run —name postgres-sdc -e POSTGRES_PASSWORD=sdc -d -p 5432:5432 postgres:alpine` in terminal
+- Run cmd `docker exec -it postgres-sdc bash` to enter the container
+
+Notes:
+- `docker ps` cmd shows all currently-running instances
