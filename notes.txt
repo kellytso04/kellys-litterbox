@@ -5,6 +5,19 @@ MISC NOTES:
 - another option is skip docker, deploy, and then go back + use docker + deploy again
 
 ------------------------------------------------------------------------------------
+Challenge: Dockerize your database & server without Docker Compose
+Perform a PG DUMP, which is when you dump all of your data into an sql file
+Run cmd `pg_dump sdc > backup.sql` in terminal
+This will store all of the data to be dumped in a file called `backup.sql`,
+which stores all the data as a backup in case something goes wrong while Dockerizing
+Once this is done, you can safely build the image for your database
+
+Challenge: we're experiencing a connection error due to a
+duplicate host, so we'll need to create another host
+Solution: In `db/config.js`, we've created a `host` prop in the pool object
+and set it to `host.docker.internal`, which will create a separate host for us to use
+
+------------------------------------------------------------------------------------
 Challenge: I'd like to add my db/config.js file to .dockerignore so that my
 personal database login information doesn't get uploaded. I'd instead replace it
 with a db/config.example.js file so that anyone who uses this repository can
