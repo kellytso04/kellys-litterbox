@@ -1,5 +1,6 @@
 node_modules
 config.js
+backup.sql
 db/config.js
 data
 coverage
